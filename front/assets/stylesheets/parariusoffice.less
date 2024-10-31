@@ -1,0 +1,477 @@
+.clearfix() {
+	&:before, &:after {
+		content: " ";
+		display: table;
+	}
+
+	&:after {
+		clear: both;
+	}
+
+	*zoom: 1;
+}
+
+.inline-block() {
+	display: inline-block;
+	zoom: 1;
+	*display: inline;
+}
+
+.border-box() {
+	-webkit-box-sizing: border-box;
+	   -moz-box-sizing: border-box;
+	        box-sizing: border-box;
+}
+
+
+.parariusoffice-searchform, .parariusoffice-quick-search {
+	margin-bottom: 10px;
+
+	.radio() {
+		&.radio {
+			input {
+				width: auto;
+				margin-right: 10px;
+			}
+
+			label {
+				width: auto;
+			}
+		}
+	}
+
+	.criterium {
+		float: left;
+		width: 33%;
+		.border-box();
+		padding-right: 10px;
+		margin-bottom: 4px;
+
+		input, select {
+			width: 100%;
+		}
+
+		.radio();
+	}
+
+	&.with-labels {
+		.criterium {
+			width: 50%;
+			.clearfix();
+
+			label, input, select {
+				float: left;
+			}
+
+			label {
+				width: 45%;
+			}
+
+			input, select {
+				width: 55%;
+			}
+
+			.radio();
+		}
+	}
+
+	.submit {
+		clear: both;
+	}
+}
+
+
+.parariusoffice-properties {
+	margin: 10px 0;
+
+	li {
+		padding: 0 0 10px 220px;
+		margin: 0 0 10px 0;
+		border-bottom: 1px solid #ccc;
+		list-style: none;
+		position: relative;
+		min-height: 210px;
+	}
+
+	.status {
+		position: absolute;
+		width: 210px;
+		top: 88px;
+		left: 0;
+		text-align: center;
+		z-index: 1;
+
+		span {
+			background: #fff;
+			color: #000;
+			line-height: 30px;
+			border-radius: 5px;
+			padding: 0 8px;
+
+			.inline-block();
+		}
+	}
+
+	.photo {
+		position: absolute;
+		top: 0;
+		left: 0;
+
+		&.second {
+			top: 0;
+			left: 110px;
+		}
+
+		&.third {
+			top: 110px;
+			left: 0;
+		}
+
+		&.fourth {
+			top: 110px;
+			left: 110px;
+		}
+	}
+
+	.info {
+		h2 {
+			margin: 10px 0;
+		}
+	}
+
+	.details p {
+		margin: 5px 0;
+
+		.key {
+			.inline-block();
+			width: 30%;
+
+			&:after {
+				content: ':';
+			}
+		}
+
+		.value {
+			.inline-block();
+			max-width: 65%;
+		}
+	}
+}
+
+
+.parariusoffice-pagination {
+	text-align: center;
+}
+
+.parariusoffice-property {
+	.details {
+		.clearfix();
+		margin-bottom: 10px;
+
+		.detailgroup {
+			.clearfix();
+
+			h3 {
+				font-weight: bold;
+				margin: 0;
+			}
+		}
+
+		p {
+			margin: 5px 0;
+			float: left;
+			width: 50%;
+
+			.key {
+				.inline-block();
+				width: 45%;
+
+				&:after {
+					content: ':';
+				}
+			}
+
+			.value {
+				.inline-block();
+			}
+		}
+	}
+
+	.description {
+		margin-bottom: 10px;
+	}
+
+	.controls {
+		.addthis {
+			line-height: 20px;
+			a {
+				line-height: 20px;
+				vertical-align: middle;
+			}
+		}
+	}
+
+	.photos {
+		white-space: nowrap;
+		overflow: hidden;
+
+		ul {
+			.inline-block();
+			margin-left: 0;
+			list-style: none;
+
+			li {
+				.inline-block();
+				width: 100px;
+			}
+		}
+
+		@arrowColor: #eee;
+		@arrowDistance: 0px;
+		.prev, .next {
+			position: absolute;
+			top: 30px;
+			border: 23px solid transparent;
+			width: 0;
+			height: 0;
+			cursor: pointer;
+		}
+
+		.prev {
+			left: @arrowDistance;
+			border-right-color: #111;
+
+			&:after {
+				display: block;
+				top: -20px;
+				left: -18px;
+				position: absolute;
+				width: 0;
+				height: 0;
+				content: ' ';
+				border: 20px solid transparent;
+				border-right-color: @arrowColor;
+			}
+		}
+
+		.next {
+			right: @arrowDistance;
+			border-left-color: #111;
+
+			&:after {
+				display: block;
+				top: -20px;
+				right: -18px;
+				position: absolute;
+				width: 0;
+				height: 0;
+				content: ' ';
+				border: 20px solid transparent;
+				border-left-color: @arrowColor;
+			}
+		}
+	}
+
+	.location {
+		.toggles {
+			a {
+				.inline-block();
+				line-height: 28px;
+				padding: 0 5px;
+				background: #eee;
+
+				&.active {
+					background: #ccc;
+				}
+			}
+		}
+		.holder {
+			height: 300px;
+
+			> div {
+				height: 100%;
+			}
+		}
+	}
+
+	&.parariusoffice-property-layout-1 {
+		//.details p
+	}
+}
+
+.parariusoffice-modal {
+	.response {
+		display: none;
+	}
+}
+
+
+
+
+.parariusoffice-random-properties {
+	margin: 10px 0;
+	.clearfix();
+
+	li {
+		float: left;
+		width: 50%;
+		padding: 0 0 10px 110px;
+		margin: 0 0 10px 0;
+		border-bottom: 1px solid #ccc;
+		list-style: none;
+		position: relative;
+		height: 110px;
+		overflow: hidden;
+
+		.border-box();
+	}
+
+	.status {
+		position: absolute;
+		top: 0;
+		left: 0;
+		max-width: 100px;
+		background: #111;
+		color: #fff;
+		line-height: 26px;
+		padding: 0 8px;
+		z-index: 1;
+	}
+
+	.photo {
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+
+	.details p {
+		margin: 3px 0;
+		position: relative;
+
+		.key {
+			.inline-block();
+			width: 40%;
+
+			&:after {
+				content: ':';
+			}
+		}
+
+		.value {
+			.inline-block();
+		}
+	}
+
+	.info {
+		position: relative;
+
+		.links {
+			position: absolute;
+			top: 80px;
+			left: 0px;
+			background: #fff;
+			line-height: 28px;
+			width: 100%;
+		}
+	}
+}
+
+
+
+.parariusoffice-maps-overview-canvas {
+	height: 300px;
+}
+
+// popup
+.popup {
+	position: absolute;
+	top: 60px;
+	max-width: 700px;
+	min-height: 100px;
+	width: 90%;
+	padding: 20px;
+	background: #fff;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	cursor: default;
+
+	// &.is-loading {
+	// 	z-index: -1;
+	// }
+
+	.close {
+		display: block;
+		font-size: 30px;
+		font-weight: bold;
+		position: absolute;
+		top: -10px;
+		right: -10px;
+		border-radius: 100%;
+		background: #fff;
+		color: #666;
+		width: 30px;
+		height: 30px;
+		line-height: 23px;
+		text-align: center;
+		padding-top: 2px;
+		cursor: pointer;
+		z-index: 2;
+	}
+
+	h2 {
+		font-size: 20px;
+	}
+}
+
+// magnify
+body > div {
+	> ul.slider {
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
+		white-space: nowrap;
+
+		li {
+			display: inline-block;
+
+			position: relative;
+			height: 100%;
+			width: 100%;
+			overflow: hidden;
+
+			img {
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				margin: auto;
+				max-width: 90%;
+				max-height: 90%;
+				border: 3px solid #fff;
+				*zoom: 1;
+			}
+		}
+	}
+
+	> a.prev, > a.next {
+		position: absolute;
+		top: 50%;
+
+		width: 50px;
+		height: 50px;
+		background-image: url(../images/prev.png);
+		left: 10px;
+		text-indent: -9999em;
+		margin-top: -25px;
+		user-select: none;
+		touch-callout: none;
+
+		&.next {
+			left: auto;
+			right: 10px;
+			background-image: url(../images/next.png);
+		}
+	}
+}

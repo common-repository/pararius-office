@@ -1,0 +1,430 @@
+.parariusoffice-searchform,
+.parariusoffice-quick-search {
+  margin-bottom: 10px;
+}
+.parariusoffice-searchform .criterium,
+.parariusoffice-quick-search .criterium {
+  float: left;
+  width: 33%;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  padding-right: 10px;
+  margin-bottom: 4px;
+}
+.parariusoffice-searchform .criterium input,
+.parariusoffice-quick-search .criterium input,
+.parariusoffice-searchform .criterium select,
+.parariusoffice-quick-search .criterium select {
+  width: 100%;
+}
+.parariusoffice-searchform .criterium.radio input,
+.parariusoffice-quick-search .criterium.radio input {
+  width: auto;
+  margin-right: 10px;
+}
+.parariusoffice-searchform .criterium.radio label,
+.parariusoffice-quick-search .criterium.radio label {
+  width: auto;
+}
+.parariusoffice-searchform.with-labels .criterium,
+.parariusoffice-quick-search.with-labels .criterium {
+  width: 50%;
+  *zoom: 1;
+}
+.parariusoffice-searchform.with-labels .criterium:before,
+.parariusoffice-quick-search.with-labels .criterium:before,
+.parariusoffice-searchform.with-labels .criterium:after,
+.parariusoffice-quick-search.with-labels .criterium:after {
+  content: " ";
+  display: table;
+}
+.parariusoffice-searchform.with-labels .criterium:after,
+.parariusoffice-quick-search.with-labels .criterium:after {
+  clear: both;
+}
+.parariusoffice-searchform.with-labels .criterium label,
+.parariusoffice-quick-search.with-labels .criterium label,
+.parariusoffice-searchform.with-labels .criterium input,
+.parariusoffice-quick-search.with-labels .criterium input,
+.parariusoffice-searchform.with-labels .criterium select,
+.parariusoffice-quick-search.with-labels .criterium select {
+  float: left;
+}
+.parariusoffice-searchform.with-labels .criterium label,
+.parariusoffice-quick-search.with-labels .criterium label {
+  width: 45%;
+}
+.parariusoffice-searchform.with-labels .criterium input,
+.parariusoffice-quick-search.with-labels .criterium input,
+.parariusoffice-searchform.with-labels .criterium select,
+.parariusoffice-quick-search.with-labels .criterium select {
+  width: 55%;
+}
+.parariusoffice-searchform.with-labels .criterium.radio input,
+.parariusoffice-quick-search.with-labels .criterium.radio input {
+  width: auto;
+  margin-right: 10px;
+}
+.parariusoffice-searchform.with-labels .criterium.radio label,
+.parariusoffice-quick-search.with-labels .criterium.radio label {
+  width: auto;
+}
+.parariusoffice-searchform .submit,
+.parariusoffice-quick-search .submit {
+  clear: both;
+}
+.parariusoffice-properties {
+  margin: 10px 0;
+}
+.parariusoffice-properties li {
+  padding: 0 0 10px 220px;
+  margin: 0 0 10px 0;
+  border-bottom: 1px solid #ccc;
+  list-style: none;
+  position: relative;
+  min-height: 210px;
+}
+.parariusoffice-properties .status {
+  position: absolute;
+  width: 210px;
+  top: 88px;
+  left: 0;
+  text-align: center;
+  z-index: 1;
+}
+.parariusoffice-properties .status span {
+  background: #fff;
+  color: #000;
+  line-height: 30px;
+  border-radius: 5px;
+  padding: 0 8px;
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+.parariusoffice-properties .photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.parariusoffice-properties .photo.second {
+  top: 0;
+  left: 110px;
+}
+.parariusoffice-properties .photo.third {
+  top: 110px;
+  left: 0;
+}
+.parariusoffice-properties .photo.fourth {
+  top: 110px;
+  left: 110px;
+}
+.parariusoffice-properties .info h2 {
+  margin: 10px 0;
+}
+.parariusoffice-properties .details p {
+  margin: 5px 0;
+}
+.parariusoffice-properties .details p .key {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  width: 30%;
+}
+.parariusoffice-properties .details p .key:after {
+  content: ':';
+}
+.parariusoffice-properties .details p .value {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  max-width: 65%;
+}
+.parariusoffice-pagination {
+  text-align: center;
+}
+.parariusoffice-property .details {
+  *zoom: 1;
+  margin-bottom: 10px;
+}
+.parariusoffice-property .details:before,
+.parariusoffice-property .details:after {
+  content: " ";
+  display: table;
+}
+.parariusoffice-property .details:after {
+  clear: both;
+}
+.parariusoffice-property .details .detailgroup {
+  *zoom: 1;
+}
+.parariusoffice-property .details .detailgroup:before,
+.parariusoffice-property .details .detailgroup:after {
+  content: " ";
+  display: table;
+}
+.parariusoffice-property .details .detailgroup:after {
+  clear: both;
+}
+.parariusoffice-property .details .detailgroup h3 {
+  font-weight: bold;
+  margin: 0;
+}
+.parariusoffice-property .details p {
+  margin: 5px 0;
+  float: left;
+  width: 50%;
+}
+.parariusoffice-property .details p .key {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  width: 45%;
+}
+.parariusoffice-property .details p .key:after {
+  content: ':';
+}
+.parariusoffice-property .details p .value {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+.parariusoffice-property .description {
+  margin-bottom: 10px;
+}
+.parariusoffice-property .controls .addthis {
+  line-height: 20px;
+}
+.parariusoffice-property .controls .addthis a {
+  line-height: 20px;
+  vertical-align: middle;
+}
+.parariusoffice-property .photos {
+  white-space: nowrap;
+  overflow: hidden;
+}
+.parariusoffice-property .photos ul {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  margin-left: 0;
+  list-style: none;
+}
+.parariusoffice-property .photos ul li {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  width: 100px;
+}
+.parariusoffice-property .photos .prev,
+.parariusoffice-property .photos .next {
+  position: absolute;
+  top: 30px;
+  border: 23px solid transparent;
+  width: 0;
+  height: 0;
+  cursor: pointer;
+}
+.parariusoffice-property .photos .prev {
+  left: 0px;
+  border-right-color: #111;
+}
+.parariusoffice-property .photos .prev:after {
+  display: block;
+  top: -20px;
+  left: -18px;
+  position: absolute;
+  width: 0;
+  height: 0;
+  content: ' ';
+  border: 20px solid transparent;
+  border-right-color: #eeeeee;
+}
+.parariusoffice-property .photos .next {
+  right: 0px;
+  border-left-color: #111;
+}
+.parariusoffice-property .photos .next:after {
+  display: block;
+  top: -20px;
+  right: -18px;
+  position: absolute;
+  width: 0;
+  height: 0;
+  content: ' ';
+  border: 20px solid transparent;
+  border-left-color: #eeeeee;
+}
+.parariusoffice-property .location .toggles a {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  line-height: 28px;
+  padding: 0 5px;
+  background: #eee;
+}
+.parariusoffice-property .location .toggles a.active {
+  background: #ccc;
+}
+.parariusoffice-property .location .holder {
+  height: 300px;
+}
+.parariusoffice-property .location .holder > div {
+  height: 100%;
+}
+.parariusoffice-modal .response {
+  display: none;
+}
+.parariusoffice-random-properties {
+  margin: 10px 0;
+  *zoom: 1;
+}
+.parariusoffice-random-properties:before,
+.parariusoffice-random-properties:after {
+  content: " ";
+  display: table;
+}
+.parariusoffice-random-properties:after {
+  clear: both;
+}
+.parariusoffice-random-properties li {
+  float: left;
+  width: 50%;
+  padding: 0 0 10px 110px;
+  margin: 0 0 10px 0;
+  border-bottom: 1px solid #ccc;
+  list-style: none;
+  position: relative;
+  height: 110px;
+  overflow: hidden;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+.parariusoffice-random-properties .status {
+  position: absolute;
+  top: 0;
+  left: 0;
+  max-width: 100px;
+  background: #111;
+  color: #fff;
+  line-height: 26px;
+  padding: 0 8px;
+  z-index: 1;
+}
+.parariusoffice-random-properties .photo {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.parariusoffice-random-properties .details p {
+  margin: 3px 0;
+  position: relative;
+}
+.parariusoffice-random-properties .details p .key {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+  width: 40%;
+}
+.parariusoffice-random-properties .details p .key:after {
+  content: ':';
+}
+.parariusoffice-random-properties .details p .value {
+  display: inline-block;
+  zoom: 1;
+  *display: inline;
+}
+.parariusoffice-random-properties .info {
+  position: relative;
+}
+.parariusoffice-random-properties .info .links {
+  position: absolute;
+  top: 80px;
+  left: 0px;
+  background: #fff;
+  line-height: 28px;
+  width: 100%;
+}
+.parariusoffice-maps-overview-canvas {
+  height: 300px;
+}
+.popup {
+  position: absolute;
+  top: 60px;
+  max-width: 700px;
+  min-height: 100px;
+  width: 90%;
+  padding: 20px;
+  background: #fff;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  cursor: default;
+}
+.popup .close {
+  display: block;
+  font-size: 30px;
+  font-weight: bold;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  border-radius: 100%;
+  background: #fff;
+  color: #666;
+  width: 30px;
+  height: 30px;
+  line-height: 23px;
+  text-align: center;
+  padding-top: 2px;
+  cursor: pointer;
+  z-index: 2;
+}
+.popup h2 {
+  font-size: 20px;
+}
+body > div > ul.slider {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+}
+body > div > ul.slider li {
+  display: inline-block;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+body > div > ul.slider li img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  max-width: 90%;
+  max-height: 90%;
+  border: 3px solid #fff;
+  *zoom: 1;
+}
+body > div > a.prev,
+body > div > a.next {
+  position: absolute;
+  top: 50%;
+  width: 50px;
+  height: 50px;
+  background-image: url(../images/prev.png);
+  left: 10px;
+  text-indent: -9999em;
+  margin-top: -25px;
+  user-select: none;
+  touch-callout: none;
+}
+body > div > a.prev.next,
+body > div > a.next.next {
+  left: auto;
+  right: 10px;
+  background-image: url(../images/next.png);
+}

@@ -1,0 +1,16 @@
+<div class="description">
+	<h2><?php echo __('Description', 'parariusoffice'); ?></h2>
+
+	<?php
+
+	if (!empty($house['description']))
+	{
+		echo nl2br($this->html($house['description']));
+	}
+	else
+	{
+		echo __('There is no description available.', 'parariusoffice');
+	}
+
+	?>
+</div>

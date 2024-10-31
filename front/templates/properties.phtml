@@ -1,0 +1,128 @@
+<?php if (empty($this->_data['result'])): ?>
+<p class="parariusoffice-no-properties">
+	<?php echo __('No properties that match your search criteria were found.', 'parariusoffice'); ?>
+</p>
+<?php else: ?>
+<ul class="parariusoffice-properties">
+	<?php
+
+	$photoClasses = array(
+		'first', 'second', 'third', 'fourth'
+	);
+	$i = 0;
+	foreach($this->_data['result'] as $house) :
+		
+		$i++;
+		
+		$title = parariusoffice_property_title($house);
+		$link = parariusoffice_property_link($house);
+		
+		?>
+		<li class="<?php
+		
+		$classes = array();
+		
+		if ($i == 1) $classes[] = 'first';
+		$classes[] = $i % 2 == 0 ? 'even' : 'odd';
+		if ($i == $data['total']) $classes[] = 'last';
+		if ($house['forsale'] == '1') $classes[] = 'sale';
+		if ($house['forrent'] == '1') $classes[] = 'rent';
+		
+		if (!in_array($house['forrent_front_status'], array(436, 442, 443, 444)))
+		{
+			$classes[] = strtotime($house['available_at']) < time() ? 'available' : 'unavailable';
+		}
+		
+		// houses that have been added in the last two months are new, 5184000 = 60*60*24*30*2
+		if (!in_array($house['forrent_front_status'], array(437))
+		 && strtotime($house['registration_date']) > time() - 5184000)
+		{
+			$classes[] = 'new';
+		}
+		
+		echo implode(' ', $classes);
+		
+		?>">
+
+		<?php if (!empty($house['forrent_front_status']) && $house['forrent_front_status'] > 1): ?>
+		<div class="status">
+			<span><?php echo __('label_' . $house['forrent_front_status'], 'parariusoffice'); ?></span>
+		</div>
+		<?php endif; ?>
+		
+		<div class="photos">
+			<a href="<?php echo $link; ?>" class="photo first">
+				<img src="<?php
+				
+				echo parariusoffice_first_photo($house);
+				
+				?>" alt="<?php echo $this->html($title); ?>">
+			</a>
+			<?php
+			$j = -1;
+			foreach ($house['photos'] as $photo) :
+				if (++$j == 0) continue;
+				?>
+				<a href="<?php echo $link; ?>" class="photo <?php echo $photoClasses[$j]; ?>">
+					<img src="<?php
+				
+					echo $photo['small'];
+				
+					?>" alt="<?php echo $this->html($title); ?>">
+				</a>
+			<?php
+			if ($j == 3) break;
+			endforeach; ?>
+		</div>
+		<div class="info">
+			<h2>
+				<a href="<?php echo $link; ?>">
+					<?php echo $this->html($title); ?>
+				</a>
+			</h2>
+			
+			<div class="details">
+				<?php parariusoffice_details($house, get_option('nomis_properties_details')); ?>
+			</div>
+			
+			<p>
+				<a class="view" href="<?php echo $link; ?>"><?php echo __('View property', 'parariusoffice'); ?></a>
+				<span class="separator"> - </span>
+				<a class="parariusoffice-print-property" href="<?php echo $link; ?>?print-property=true"><?php echo __('Print', 'parariusoffice'); ?></a>
+			</p>
+		</div>
+		
+		<div class="clear"></div>
+	</li>
+	
+	<?php
+	endforeach;
+	?>
+</ul>
+
+<div class="clear"></div>
+
+<?php
+
+if ($data['total_pages'] > 1)
+{
+	$add_args = $data['search'];
+	unset($add_args['page']);
+	
+	echo '<p class="parariusoffice-pagination">' . 
+		paginate_links(array(
+			'total' => $data['total_pages'],
+			'current' => $data['page'],
+		
+			// maybe include this: get_option('permalink_structure')
+			'base' => rtrim(get_page_link(get_the_ID()), '/') . '/%#%/',
+			'add_args' => $add_args
+		)) .
+		'</p>';
+}
+
+?>
+
+<?php endif; ?>
+
+<div class="clear"></div>

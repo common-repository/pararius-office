@@ -1,0 +1,82 @@
+<ul class="parariusoffice-random-properties">
+	<?php
+
+	$i = 0;
+	foreach ($this->_data['result'] as $house) :
+
+		$i++;
+
+		$title = parariusoffice_property_title($house);
+		$link = parariusoffice_property_link($house);
+
+		?>
+		<li class="<?php
+		$classes = array();
+		
+		if ($i == 1) $classes[] = 'first';
+		$classes[] = $i % 2 == 0 ? 'even' : 'odd';
+		if ($i == $data['total']) $classes[] = 'last';
+		if ($house['forsale'] == '1') $classes[] = 'sale';
+		if ($house['forrent'] == '1') $classes[] = 'rent';
+
+		if (!in_array($house['forrent_front_status'], array(436, 442, 443, 444)))
+		{
+			$classes[] = strtotime($house['available_at']) < time() ? 'available' : 'unavailable';
+		}
+		// houses that have been added in the last two months are new, 5184000 = 60*60*24*30*2
+		if (!in_array($house['forrent_front_status'], array(437))
+		 && strtotime($house['registration_date']) > time() - 5184000)
+		{
+			$classes[] = 'new';
+		}
+		
+		echo implode(' ', $classes);
+
+		?>">
+
+		<?php if (!empty($house['forrent_front_status']) && $house['forrent_front_status'] > 1): ?>
+		<div class="status">
+			<span><?php echo __('label_' . $house['forrent_front_status'], 'parariusoffice'); ?></span>
+		</div>
+		<?php endif; ?>
+
+		<?php if (get_option('nomis_random_properties_photo') == '1'): ?>
+		<div class="photo">
+			<a href="<?php echo $link; ?>">
+				<img src="<?php
+				
+				echo parariusoffice_first_photo($house);
+				
+				?>" alt="<?php echo $this->html($title); ?>">
+			</a>
+		</div>
+		<?php endif; ?>
+		
+		<div class="info">
+			<?php if (get_option('nomis_random_properties_title') == '1'): ?>
+			<h3>
+				<a href="<?php echo $link; ?>">
+					<?php echo $this->html($title); ?>
+				</a>
+			</h3>
+			<?php endif; ?>
+			
+			<div class="details">
+				<?php parariusoffice_details($house, get_option('nomis_random_properties_details')); ?>
+			</div>
+			
+			<?php if (get_option('nomis_random_properties_link') == '1'): ?>
+				<p class="links">
+					<a class="view" href="<?php echo $link; ?>"><?php echo __('View property', 'parariusoffice'); ?></a>
+					<span class="separator"> - </span>
+					<a class="parariusoffice-print-property" href="<?php echo $link; ?>?print-property=true"><?php echo __('Print', 'parariusoffice'); ?></a>
+				</p>
+			<?php endif; ?>
+		</div>
+		
+		<div class="clear"></div>
+	</li>
+	<?php
+	endforeach;
+	?>
+</ul>

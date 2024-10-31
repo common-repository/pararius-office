@@ -1,0 +1,34 @@
+<?php
+
+$house = $this->_data['property'];
+
+if (empty($house))
+{
+	echo __('Could not find the property, it\'s not online anymore, or never was.', 'parariusoffice');
+}
+else
+{
+	// disabled for now
+	if (false && in_array(get_option('nomis_property_layout'), array(2, 3)))
+	{
+		$layout = get_option('nomis_property_layout');
+	}
+	else
+	{
+		$layout = 1;
+	}
+
+	?>
+
+	<div class="parariusoffice-property parariusoffice-property-layout-<?php echo $layout; ?>">
+
+		<?php
+
+		include __DIR__ . '/property-layout/' . $layout . '.phtml';
+
+		?>
+
+	</div>
+
+	<?php
+}

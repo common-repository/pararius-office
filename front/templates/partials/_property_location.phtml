@@ -1,0 +1,29 @@
+<?php
+
+if (!empty($house['lat']) && (get_option('nomis_property_googlemaps') == '1' || get_option('nomis_property_streetview') == '1')) :
+	
+	?>
+	<div class="location" data-lat="<?php echo $house['lat']; ?>" data-lng="<?php echo $house['lng']; ?>">
+		<div class="toggles">
+			<?php if (get_option('nomis_property_googlemaps') == '1') : ?>
+				<a href="#maps"><?php echo __('Show maps', 'parariusoffice'); ?></a>
+			<?php endif;
+
+			if (get_option('nomis_property_streetview') == '1') : ?>
+				<a href="#streetview"><?php echo __('Show streetview', 'parariusoffice'); ?></a>
+			<?php endif; ?>
+		</div>
+
+		<div class="holder">
+			<?php if (get_option('nomis_property_googlemaps') == '1'): ?>
+				<div class="maps"></div>
+			<?php endif;
+
+			if (get_option('nomis_property_streetview') == '1'): ?>
+				<div class="streetview"></div>
+			<?php endif; ?>
+		</div>
+	</div>
+<?php
+
+endif;

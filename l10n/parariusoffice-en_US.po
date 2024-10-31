@@ -1,0 +1,92 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Pararius Office Wordpress Plugin\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2011-11-28 18:07+0100\n"
+"PO-Revision-Date: 2016-04-15 13:31+0200\n"
+"Language-Team: Anno MMX\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _;gettext;gettext_noop;__;_e\n"
+"X-Poedit-Basepath: parariusoffice\n"
+"Language: en\n"
+"X-Generator: Poedit 1.8.7\n"
+"Last-Translator: Tim <tim@annommx.com>\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPath-1: templates\n"
+
+msgid "label_437"
+msgstr "New"
+
+msgid "label_438"
+msgstr "Top"
+
+msgid "label_439"
+msgstr "Shortly"
+
+msgid "label_440"
+msgstr "Top property"
+
+msgid "label_441"
+msgstr "Top property"
+
+msgid "label_442"
+msgstr "Sold"
+
+msgid "label_443"
+msgstr "Sold (option)"
+
+msgid "label_436"
+msgstr "Leased"
+
+msgid "label_444"
+msgstr "Leased (option)"
+
+msgid "label_445"
+msgstr "Price reduced"
+
+msgid "label_446"
+msgstr "Recommended"
+
+msgid "label_706"
+msgstr "Open house"
+
+msgid "label_759"
+msgstr "Auction"
+
+msgid "label_760"
+msgstr "Price deal"
+
+msgid "label_774"
+msgstr "Archive"
+
+msgid "label_775"
+msgstr "Purchased"
+
+msgid "label_809"
+msgstr "Starterslening"
+
+msgid "label_858"
+msgstr "Buitenlands aanbod"
+
+msgid "label_874"
+msgstr "Aangehuur"
+
+msgid "label_885"
+msgstr "Bedrijfsruimte"
+
+msgid "label_886"
+msgstr "Qualifies for rent allowance"
+
+msgid "label_887"
+msgstr "Rented"
+
+msgid "label_888"
+msgstr "Available"
+
+msgid "label_927"
+msgstr "No commission fee"
+
+msgid "label_948"
+msgstr "In renovation"

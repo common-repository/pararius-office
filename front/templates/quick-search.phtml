@@ -1,0 +1,47 @@
+<?php
+
+$action = parariusoffice_searchresults_page();
+$searchCriteria = get_option('nomis_quick_search_criteria');
+
+?>
+
+
+<form method="get" action="<?php echo $action; ?>" class="parariusoffice-quick-search<?php
+
+$classes = array();
+
+if (get_option('nomis_quick_search_display_labels') == '1')
+{
+	$classes[] = 'with-labels';
+}
+
+if (!empty($searchCriteria['forsale']))
+{
+	$classes[] = 'forsale-enabled';
+}
+
+if (!empty($classes))
+{
+	echo ' ' . implode(' ', $classes);
+}
+
+?>">
+
+	<?php
+
+	parariusoffice_search(
+		$searchCriteria,
+		$data,
+		'quick',
+		$this->getAllCities(),
+		$this->getAllDistricts(),
+		$this->getAllHouseTypes(),
+		$this->getAllCountries()
+		);
+
+	?>
+
+	<div class="submit">
+		<input type="submit" class="search_button" value="<?php echo __('Search', 'parariusoffice'); ?>">
+	</div>
+</form>

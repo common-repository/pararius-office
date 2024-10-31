@@ -1,0 +1,24 @@
+<ul class="parariusoffice-maps-overview">
+	<?php
+
+$mapItems = array();
+$num = 0;
+$totalLat = 0;
+$totalLng = 0;
+
+foreach ($this->_data['result'] as $house)
+{
+	if (empty($house['lat']) || empty($house['lng']))
+	{
+		continue;
+	}
+	
+	$title = parariusoffice_property_title($house);
+	$link = parariusoffice_property_link($house);
+
+	echo '<li data-title="' . $this->html($title) . '" data-lat="' . $house['lat'] . '" data-lng="' . $house['lng'] .
+			'"><a href="' . $link . '">' . $this->html($title) . '</a></li>' . PHP_EOL;
+}
+
+?>
+</ul>

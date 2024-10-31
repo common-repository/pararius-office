@@ -1,0 +1,628 @@
+<?php
+
+$htmlChecked = 'checked="checked" ';
+$htmlSelected = 'selected="selected" ';
+
+?><div class="wrap" id="parariusoffice-options">
+	<form method="post" action="">
+		<input type="hidden" name="parariusoffice-submit" value="1">
+		<div id="icon-options-general" class="icon32"><br></div>
+		<h2>Pararius Office &raquo; <?php _e('Settings'); ?>
+			<input class="button-primary po-submit" type="submit" value="<?php _e('Save changes', 'parariusoffice'); ?>">
+		</h2>
+		
+		<br>
+		
+		<div class="tabs">
+			<ul id="tabs-nav">
+				<li><a href="#general"><?php _e('General', 'parariusoffice'); ?></a></li>
+				<?php if ($this->getApi()->checkApiKey()): ?>
+				<li><a href="#individual-property"><?php _e('Individual property', 'parariusoffice'); ?></a></li>
+				<li><a href="#search"><?php _e('Search', 'parariusoffice'); ?></a></li>
+				<li><a href="#quick-search-form"><?php _e('Quick search form', 'parariusoffice'); ?></a></li>
+				<li><a href="#searchresults"><?php _e('Searchresults', 'parariusoffice'); ?></a></li>
+				<li><a href="#random-properties"><?php _e('Random properties', 'parariusoffice'); ?></a></li>
+				<li><a href="#forms"><?php _e('Forms', 'parariusoffice'); ?></a></li>
+				<!-- <li><a href="#mobile"><?php _e('Mobile', 'parariusoffice'); ?></a></li> -->
+				<li><a href="#help"><?php _e('Help', 'parariusoffice'); ?></a></li>
+				<?php endif; ?>
+			</ul>
+			
+			<div id="general">
+				<table class="form-table">
+					<tr valign="top">
+						<th scope="row">
+							<label for="api-key"><?php _e('Api key', 'parariusoffice'); ?></label>
+						</th>
+						<td>
+							<?php
+							
+							$apiKey = get_option('nomis_api_key');
+							
+							?>
+							<input style="width:300px" type="text" name="api-key" id="api-key" value="<?php echo $apiKey; ?>" />
+							<?php if ($this->getApi()->checkApiKey()): ?>
+							<input name="api-key-valid" value="Y" type="hidden" />
+							<span class="description green"><?php _e('Verified', 'parariusoffice'); ?></span>
+							<?php elseif (!$this->getApi()->checkApiKey() && !empty($apiKey)): ?>
+							<span class="description red"><?php _e('Incorrect', 'parariusoffice'); ?></span>
+							<?php endif; ?>
+							<br><span class="description"><?php echo __('Test API-key'); ?>: 7c767a68631b25217ce9fedff2490b19</span>
+						</td>
+					</tr>
+					<?php if ($this->getApi()->checkApiKey()): ?>
+					<tr valign="top">
+						<th scope="row">
+							<label for="google_analytics_key">
+								<?php _e('Google analytics key', 'parariusoffice'); ?>
+							</label>
+						</th>
+						<td>
+							<input type="text" id="google_analytics_key" name="google_analytics_key" value="<?php echo get_option('nomis_google_analytics_key'); ?>" />
+						</td>
+					</tr>
+
+					<tr valign="top">
+						<th scope="row">
+							<label><?php _e('City replacements', 'parariusoffice'); ?></label>
+						</th>
+						<td>
+							<table class="form-table">
+								<?php
+								
+								$cityList = include PARARIUSOFFICE_PLUGIN_PATH . '/lib/lists/cities.php';
+
+								foreach ($cityList as $option => $info) :
+
+									$currentValue = get_option('nomis_' . $option);
+
+									?>
+									<tr valign="top">
+										<th scope="row">
+											<label for="<?php echo $option; ?>"><?php echo implode('/', $info); ?></label>
+										</th>
+										<td>
+											<select id="<?php echo $option; ?>" name="<?php echo $option; ?>">
+												<option value=""></option>
+												<?php foreach ($info as $k => $v) : ?>
+													<option value="<?php
+														echo $k; ?>"<?php 
+														echo $currentValue === $k ? 'selected="selected"' : ''; ?>><?php
+														echo $v; ?></option>
+												<?php endforeach; ?>
+											</select>
+										</td>
+									</tr>
+								<?php endforeach; ?>
+							</table>
+						</td>
+					</tr>
+					<?php else: ?>
+					<p><?php _e('You have to enter a valid API key to gain access to all the options.', 'parariusoffice'); ?></p>
+					<?php endif; ?>
+				</table>
+			</div>
+
+			<?php if ($this->getApi()->checkApiKey()): ?>
+
+			<div id="individual-property">
+				<table class="form-table">
+					<!-- disabled for now
+					<tr valign="top">
+						<th scope="row">
+							<?php _e('Layout', 'parariusoffice'); ?>
+						</th>
+						<td>
+							<ul id="property-layout">
+								<li>
+									<input id="property-layout-1" type="radio" name="property_layout" value="1"<?php if (get_option('nomis_property_layout') == '1') echo ' checked="checked"'; ?> />
+									<label for="property-layout-1">
+										<img src="<?php echo PARARIUSOFFICE_PLUGIN_URL; ?>/admin/assets/images/property_template_1.gif" alt="Layout 1" />
+									</label>
+								</li>
+								<li>
+									<input id="property-layout-2" type="radio" name="property_layout" value="2"<?php if (get_option('nomis_property_layout') == '2') echo ' checked="checked"'; ?> />
+									<label for="property-layout-2">
+										<img src="<?php echo PARARIUSOFFICE_PLUGIN_URL; ?>/admin/assets/images/property_template_2.gif" alt="Layout 2" />
+									</label>
+								</li>
+								<li>
+									<input id="property-layout-3" type="radio" name="property_layout" value="3"<?php if (get_option('nomis_property_layout') == '3') echo ' checked="checked"'; ?> />
+									<label for="property-layout-3">
+										<img src="<?php echo PARARIUSOFFICE_PLUGIN_URL; ?>/admin/assets/images/property_template_3.gif" alt="Layout 3" />
+									</label>
+								</li>
+							</ul>
+						</td>
+					</tr>
+					-->
+					<tr valign="top">
+						<th scope="row"><?php _e('Actions', 'parariusoffice'); ?></th>
+						<td>
+							<ul>
+								<li>
+									<input type="checkbox" name="property_back" id="property_back" value="1" <?php if (get_option('nomis_property_back') == '1') echo $htmlChecked; ?>/>
+									<label for="property_back">
+										<?php _e('Back to search results button', 'parariusoffice'); ?>
+									</label>
+								</li>
+								<li>
+									<input type="checkbox" name="property_contact" id="property_contact" value="1" <?php if (get_option('nomis_property_contact') == '1') echo $htmlChecked; ?>/>
+									<label for="property_contact">
+										<?php _e('Contact us about this house button', 'parariusoffice'); ?>
+									</label>
+								</li>
+								<li>
+									<input type="checkbox" name="property_addthis" id="property_addthis" value="1" <?php if (get_option('nomis_property_addthis') == '1') echo $htmlChecked; ?>/>
+									<label for="property_addthis">
+										<?php _e('AddThis button', 'parariusoffice'); ?>
+										<span class="description">(<?php _e('Will display buttons to share on Facebook, Hyves etc.', 'parariusoffice'); ?>)</span>
+									</label>
+								</li>
+								<li>
+									<input type="checkbox" name="property_mailtofriend" id="property_mailtofriend" value="1" <?php if (get_option('nomis_property_mailtofriend') == '1') echo $htmlChecked; ?>/>
+									<label for="property_mailtofriend">
+										<?php _e('Mail to friend link', 'parariusoffice'); ?>
+									</label>
+								</li>
+								<li>
+									<input type="checkbox" name="property_print" id="property_print" value="1" <?php if (get_option('nomis_property_print') == '1') echo $htmlChecked; ?>/>
+									<label for="property_print">
+										<?php _e('Print button', 'parariusoffice'); ?>
+									</label>
+								</li>
+							</ul>
+						</td>
+					</tr>
+					<!-- we now send all to the API
+					<tr valign="top">
+						<th scope="row">
+							<label for="property_contact_email"><?php _e('Contact email', 'parariusoffice'); ?></label>
+						</th>
+						<td>
+							<input type="text" name="property_contact_email" id="property_contact_email" value="<?php echo get_option('nomis_property_contact_email'); ?>" />
+							<span class="description"><?php _e('This emailaddress will be used for contact about property requests', 'parariusoffice'); ?></span>
+						</td>
+					</tr>
+					-->
+					<tr valign="top">
+						<th scope="row"><?php _e('Location', 'parariusoffice'); ?></th>
+						<td>
+							<ul>
+								<li>
+									<input type="checkbox" name="property_googlemaps" id="googlemaps" value="1" <?php if (get_option('nomis_property_googlemaps') == '1') echo $htmlChecked; ?>/>
+									<label for="googlemaps"><?php _e('Display Google Maps', 'parariusoffice'); ?></label>
+								</li>
+								<li>
+									<input type="checkbox" name="property_streetview" id="streetview" value="1" <?php if (get_option('nomis_property_streetview') == '1') echo $htmlChecked; ?>/>
+									<label for="streetview"><?php _e('Display Google Streetview', 'parariusoffice'); ?></label>
+								</li>
+							</ul>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row">
+							<label>
+								<?php _e('Rent details display and order', 'parariusoffice'); ?>
+							</label>
+						</th>
+						<td>
+							<input type="hidden" name="nomis_property_details_order" id="property-details-order" value="<?php echo $detailsOrder['nomis_property_details']; ?>" />
+							<ul id="nomis-property-details" class="property-details details">
+								<?php $i = 1; foreach (get_option('nomis_property_details') as $detail => $checked): ?>
+								<li class="clearfix" id="<?php echo $detail . '_' . $i; ?>">
+									<span class="ui-icon ui-icon-arrowthick-2-n-s sortable handle"></span>
+									<span class="number"><?php echo $i; ?></span>
+									<input type="checkbox" name="nomis_property_details_<?php echo $detail; ?>" id="nomis_property_details_<?php echo $detail; ?>" value="1" <?php echo $checked == 1 ? 'checked="checked" ' : ''; ?>/>
+									<label for="nomis_property_details_<?php echo $detail; ?>">
+										<?php echo _e(ucfirst(str_replace('_', ' ', $detail)), 'parariusoffice'); ?>
+									</label>
+								</li>
+								<?php $i ++; endforeach; ?>
+							</ul>
+						</td>
+					</tr>
+					<tr valign="top" id="sale-details">
+						<th scope="row">
+							<label>
+								<?php _e('Properties for sale', 'parariusoffice'); ?>
+							</label>
+						</th>
+						<td>
+							<input type="checkbox" name="property_different_sale_details" id="property_different_sale_details" value="1" <?php if (get_option('nomis_property_different_sale_details') == '1') echo $htmlChecked; ?>/>
+							<label for="property_different_sale_details"><?php _e('Use different list of details for properties that are for sale', 'parariusoffice'); ?> <span class="description">(<?php _e('The list of details below is used', 'parariusoffice'); ?>)</span>.</label>
+						</td>
+					</tr>
+
+					<tr valign="top" id="sale-details">
+						<th scope="row">
+							<label>
+								<?php _e('Sale details display and order', 'parariusoffice'); ?>
+							</label>
+						</th>
+						<td>
+							<input type="hidden" name="nomis_property_sale_details_order" id="property-sale-details-order" value="<?php echo $saleDetailsOrder['nomis_property_sale_details']; ?>" />
+							<ul id="nomis-property-sale-details">
+								<?php $i = 1; foreach (get_option('nomis_property_sale_details') as $categoryName => $categoryDetails): ?>
+								<li id="<?php echo $categoryName; ?>" class="details-category">
+									<h4>
+										<input type="checkbox" class="uncheck-all" />
+										<span class="ui-icon ui-icon-arrowthick-2-n-s sortable handle"></span>
+										<?php _e(ucfirst(str_replace('_', ' ', $categoryName)), 'parariusoffice'); ?>
+									</h4>
+									<ul>
+										<?php foreach ($categoryDetails as $detail => $checked): ?>
+										<li class="clearfix" id="<?php echo $detail . '_' . $i; ?>">
+											<input type="hidden" name="nomis_property_sale_details[<?php echo $categoryName . '][' . $detail; ?>]" id="nomis_property_sale_details_<?php echo $detail; ?>" value="0" />
+											<input type="checkbox" name="nomis_property_sale_details[<?php echo $categoryName . '][' . $detail; ?>]" id="nomis_property_sale_details_<?php echo $detail; ?>" value="1" <?php echo $checked == 1 ? 'checked="checked" ' : ''; ?>/>
+											<span class="ui-icon ui-icon-arrowthick-2-n-s sortable handle"></span>
+											<label for="nomis_property_sale_details_<?php echo $detail; ?>">
+												<?php echo _e(ucfirst(str_replace('_', ' ', str_replace('forsale_', '', $detail))), 'parariusoffice'); ?>
+											</label>
+										</li>
+										<?php $i ++; endforeach; ?>
+									</ul>
+								</li>
+								<?php endforeach; ?>
+							</ul>
+						</td>
+					</tr>
+
+					<tr valign="top" id="bog-details">
+						<th scope="row">
+							<label>
+								<?php _e('BOG details display and order', 'parariusoffice'); ?>
+							</label>
+						</th>
+						<td>
+							<input type="hidden" name="nomis_property_bog_details_order" id="property-bog-details-order" value="<?php echo $bogDetailsOrder['nomis_property_bog_details']; ?>" />
+							<ul id="nomis-property-bog-details">
+								<?php $i = 1; foreach (get_option('nomis_property_bog_details') as $categoryName => $categoryDetails): ?>
+								<li id="<?php echo $categoryName; ?>" class="details-category">
+									<h4>
+										<input type="checkbox" class="uncheck-all" />
+										<span class="ui-icon ui-icon-arrowthick-2-n-s sortable handle"></span>
+										<?php _e(ucfirst(str_replace('_', ' ', $categoryName)), 'parariusoffice'); ?>
+									</h4>
+									<ul>
+										<?php foreach ($categoryDetails as $detail => $checked): ?>
+										<li class="clearfix" id="<?php echo $detail . '_' . $i; ?>">
+											<input type="hidden" name="nomis_property_bog_details[<?php echo $categoryName . '][' . $detail; ?>]" id="nomis_property_bog_details_<?php echo $detail; ?>" value="0" />
+											<input type="checkbox" name="nomis_property_bog_details[<?php echo $categoryName . '][' . $detail; ?>]" id="nomis_property_bog_details_<?php echo $detail; ?>" value="1" <?php echo $checked == 1 ? 'checked="checked" ' : ''; ?>/>
+											<span class="ui-icon ui-icon-arrowthick-2-n-s sortable handle"></span>
+											<label for="nomis_property_bog_details_<?php echo $detail; ?>">
+												<?php echo _e(ucfirst(str_replace('_', ' ', str_replace('bog_', '', $detail))), 'parariusoffice'); ?>
+											</label>
+										</li>
+										<?php $i ++; endforeach; ?>
+									</ul>
+								</li>
+								<?php endforeach; ?>
+							</ul>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div id="search">
+				<table class="form-table">
+					<tr valign="top">
+						<th scope="row">
+							<label>
+								<?php _e('Search options', 'parariusoffice'); ?>
+							</label>
+						</th>
+						<td>
+							<ul>
+								<li>
+									<input type="checkbox" name="search_display_labels" id="search_display_labels" value="1" <?php if (get_option('nomis_search_display_labels') == '1') echo $htmlChecked; ?> />
+									<label for="search_display_labels"><?php _e('Display labels', 'parariusoffice'); ?></label>
+								</li>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php _e('Search criteria', 'parariusoffice'); ?></th>
+						<td>
+							<ul class="search-criteria" id="search-criteria">
+								<input type="hidden" id="nomis-search-criteria" name="nomis_search_criteria" value="<?php echo $searchCriteriaOrder['nomis_search_criteria']; ?>"/>
+								<?php $i = 0; foreach (get_option('nomis_search_criteria') as $criterium => $checked): $i++; ?>
+								<li class="clearfix" id="<?php echo $criterium . '_' . $i; ?>">
+									<span class="ui-icon ui-icon-arrowthick-2-n-s sortable handle"></span>
+									<span class="number"><?php echo $i; ?></span>
+									<input type="checkbox" name="nomis_search_criteria_<?php echo $criterium; ?>" id="search_<?php echo $criterium; ?>" value="1" <?php echo $checked == 1 ? 'checked="checked" ' : ''; ?>/>
+									<label for="search_<?php echo $criterium; ?>">
+										<?php _e(ucfirst(str_replace('_', ' ', $criterium)), 'parariusoffice'); ?>
+									</label>
+								</li>
+								<?php endforeach; ?>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php _e('Minimum price steps', 'parariusoffice'); ?></th>
+						<td>
+							<input type="text" name="search_min_price_steps" value="<?php echo get_option('nomis_search_min_price_steps'); ?>" />
+							<span class="description"><?php _e('Enter prices separated by comma\'s', 'parariusoffice'); ?></span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php _e('Maximum price steps', 'parariusoffice'); ?></th>
+						<td>
+							<input type="text" name="search_max_price_steps" value="<?php echo get_option('nomis_search_max_price_steps'); ?>" />
+							<span class="description"><?php _e('Enter prices separated by comma\'s', 'parariusoffice'); ?></span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php _e('Search criteria sale', 'parariusoffice'); ?><br /><span class="description">[parariusoffice-properties type=&quot;sale&quot;]</span></th>
+						<td>
+							<ul class="search-criteria" id="search-criteria-sale">
+								<input type="hidden" id="nomis-search-criteria-sale" name="nomis_search_criteria_sale" value="<?php echo $searchCriteriaOrder['nomis_search_criteria_sale']; ?>"/>
+								<?php $i = 0; foreach (get_option('nomis_search_criteria_sale') as $criterium => $checked): $i++; ?>
+								<li class="clearfix" id="<?php echo $criterium . '_' . $i; ?>">
+									<span class="ui-icon ui-icon-arrowthick-2-n-s sortable handle"></span>
+									<span class="number"><?php echo $i; ?></span>
+									<input type="checkbox" name="nomis_search_criteria_sale_<?php echo $criterium; ?>" id="search_sale_<?php echo $criterium; ?>" value="1" <?php echo $checked == 1 ? 'checked="checked" ' : ''; ?>/>
+									<label for="search_sale_<?php echo $criterium; ?>">
+										<?php _e(ucfirst(str_replace('_', ' ', $criterium)), 'parariusoffice'); ?>
+									</label>
+								</li>
+								<?php endforeach; ?>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php _e('Minimum price steps sale', 'parariusoffice'); ?></th>
+						<td>
+							<input type="text" name="search_min_price_steps_sale" value="<?php echo get_option('nomis_search_min_price_steps_sale'); ?>" />
+							<span class="description"><?php _e('Enter prices separated by comma\'s', 'parariusoffice'); ?></span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php _e('Maximum price steps sale', 'parariusoffice'); ?></th>
+						<td>
+							<input type="text" name="search_max_price_steps_sale" value="<?php echo get_option('nomis_search_max_price_steps_sale'); ?>" />
+							<span class="description"><?php _e('Enter prices separated by comma\'s', 'parariusoffice'); ?></span>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div id="quick-search-form">
+				<table class="form-table">
+					<tr valign="top">
+						<th scope="row">
+							<label for="order">
+								<?php _e('Search options', 'parariusoffice'); ?>
+							</label>
+						</th>
+						<td>
+							<ul>
+								<li>
+									<input type="checkbox" name="quick_search_display_labels" id="quick_search_display_labels" value="1" <?php if (get_option('nomis_quick_search_display_labels') == '1') echo $htmlChecked; ?> />
+									<label for="quick_search_display_labels"><?php _e('Display labels', 'parariusoffice'); ?></label>
+								</li>
+							</ul>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row">
+							<label for="quick_search_action">
+								<?php _e('Search results page id', 'parariusoffice'); ?>
+							</label>
+						</th>
+						<td>
+							<input type="text" name="quick_search_action" id="quick_search_action" value="<?php echo get_option('nomis_quick_search_action'); ?>" />
+							<span class="description"><?php _e('This is where the form action points to. Should be the id of the page where you use the shortcode [parariusoffice-properties]. By default the first page that includes this shortcode will be used, which might cause the use of the wrong page.', 'parariusoffice'); ?><br>
+								<?php echo __('Current setting', 'parariusoffice'); ?>: <?php
+								$searchresultsPage = parariusoffice_searchresults_page();
+								printf('<a href="%1$s" target="_blank">%1$s</a>', $searchresultsPage);
+								?>
+							</span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php _e('Search criteria', 'parariusoffice'); ?></th>
+						<td>
+							<ul class="search-criteria" id="quick-search-criteria">
+								<input type="hidden" id="nomis-quick-search-criteria" name="nomis_quick_search_criteria" value="<?php echo $searchCriteriaOrder['nomis_quick_search_criteria']; ?>"/>
+								<?php $i = 0; foreach (get_option('nomis_quick_search_criteria') as $criterium => $checked): $i++; ?>
+								<li class="clearfix" id="<?php echo $criterium . '_' . $i; ?>">
+									<span class="ui-icon ui-icon-arrowthick-2-n-s sortable handle"></span>
+									<span class="number"><?php echo $i; ?></span>
+									<input type="checkbox" name="nomis_quick_search_criteria_<?php echo $criterium; ?>" id="quick_search_<?php echo $criterium; ?>" value="1" <?php echo $checked == 1 ? 'checked="checked" ' : ''; ?>/>
+									<label for="quick_search_<?php echo $criterium; ?>">
+										<?php _e(ucfirst(str_replace('_', ' ', $criterium)), 'parariusoffice'); ?>
+									</label>
+								</li>
+								<?php endforeach; ?>
+							</ul>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php _e('Minimum price steps', 'parariusoffice'); ?></th>
+						<td>
+							<input type="text" name="quick_search_min_price_steps" value="<?php echo get_option('nomis_quick_search_min_price_steps'); ?>" />
+							<span class="description"><?php _e('Enter prices separated by comma\'s', 'parariusoffice'); ?></span>
+						</td>
+					</tr>
+					<tr>
+						<th scope="row"><?php _e('Maximum price steps', 'parariusoffice'); ?></th>
+						<td>
+							<input type="text" name="quick_search_max_price_steps" value="<?php echo get_option('nomis_quick_search_max_price_steps'); ?>" />
+							<span class="description"><?php _e('Enter prices separated by comma\'s', 'parariusoffice'); ?></span>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div id="searchresults">
+				<table class="form-table">
+					<tr valign="top">
+						<th scope="row">
+							<label for="api-key">
+								<?php _e('Details display and order', 'parariusoffice'); ?>
+							</label>
+						</th>
+						<td>
+							<input type="hidden" name="nomis_properties_details_order" id="properties-details-order" value="<?php echo $detailsOrder['nomis_properties_details']; ?>" />
+							<ul id="nomis-properties-details" class="properties-details details">
+								<?php $i = 1; foreach (get_option('nomis_properties_details') as $detail => $checked): ?>
+								<li class="clearfix" id="<?php echo $detail . '_' . $i; ?>">
+									<span class="ui-icon ui-icon-arrowthick-2-n-s sortable handle"></span>
+									<span class="number"><?php echo $i; ?></span>
+									<input type="checkbox" name="nomis_properties_details_<?php echo $detail; ?>" id="nomis_properties_details_<?php echo $detail; ?>" value="1" <?php echo $checked == 1 ? 'checked="checked" ' : ''; ?>/>
+									<label for="nomis_properties_details_<?php echo $detail; ?>">
+										<?php echo _e(ucfirst(str_replace('_', ' ', $detail)), 'parariusoffice'); ?>
+									</label>
+								</li>
+								<?php $i ++; endforeach; ?>
+							</ul>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row">
+							<label>
+								<?php _e('Order by', 'parariusoffice'); ?>
+							</label>
+						</th>
+						<td>
+							<?php
+							list($orderType, $orderAscdesc) = explode('=', get_option('nomis_properties_order'));
+							?>
+							<select name="properties_order_type">
+								<option <?php echo $orderType == 'price' ? $htmlSelected : ''; ?> value="price"><?php _e('Price', 'parariusoffice'); ?></option>
+								<option <?php echo $orderType == 'date' ? $htmlSelected : ''; ?> value="date"><?php _e('Date', 'parariusoffice'); ?></option>
+								<option <?php echo $orderType == 'city' ? $htmlSelected : ''; ?> value="city"><?php _e('City', 'parariusoffice'); ?></option>
+								<option <?php echo $orderType == 'street' ? $htmlSelected : ''; ?> value="street"><?php _e('Street', 'parariusoffice'); ?></option>
+								<option <?php echo $orderType == 'district' ? $htmlSelected : ''; ?> value="district"><?php _e('District', 'parariusoffice'); ?></option>
+								<option <?php echo $orderType == 'bedrooms' ? $htmlSelected : ''; ?> value="bedrooms"><?php _e('Bedrooms', 'parariusoffice'); ?></option>
+								<option <?php echo $orderType == 'forsale_price' ? $htmlSelected : ''; ?> value="forsale_price"><?php _e('Saleprice', 'parariusoffice'); ?></option>
+								<option <?php echo $orderType == 'available' ? $htmlSelected : ''; ?> value="available"><?php _e('Availability', 'parariusoffice'); ?></option>
+								<option <?php echo $orderType == 'random' ? $htmlSelected : ''; ?> value="random"><?php _e('Random', 'parariusoffice'); ?></option>
+							</select>
+							<select name="properties_order_ascdesc">
+								<option <?php echo $orderAscdesc == 'asc' ? $htmlSelected : ''; ?> value="asc"><?php _e('Ascending', 'parariusoffice'); ?></option>
+								<option <?php echo $orderAscdesc == 'desc' ? $htmlSelected : ''; ?> value="desc"><?php _e('Descending', 'parariusoffice'); ?></option>
+							</select>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div id="random-properties">
+				<table class="form-table">
+					<tr valign="top">
+						<th scope="row"><?php _e('Options', 'parariusoffice'); ?></th>
+						<td>
+							<ul>
+								<li>
+									<input type="checkbox" name="random_properties_link" id="random_properties_link" value="1" <?php if (get_option('nomis_random_properties_link') == '1') echo $htmlChecked; ?>/>
+									<label for="random_properties_link"><?php _e('Display link', 'parariusoffice'); ?></label>
+								</li>
+								<li>
+									<input type="checkbox" name="random_properties_title" id="random_properties_title" value="1" <?php if (get_option('nomis_random_properties_title') == '1') echo $htmlChecked; ?>/>
+									<label for="random_properties_title"><?php _e('Display title', 'parariusoffice'); ?></label>
+								</li>
+								<li>
+									<input type="checkbox" name="random_properties_photo" id="random_properties_photo" value="1" <?php if (get_option('nomis_random_properties_photo') == '1') echo $htmlChecked; ?>/>
+									<label for="random_properties_photo"><?php _e('Display photo', 'parariusoffice'); ?></label>
+								</li>
+							</ul>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row">
+							<?php _e('Details display and order', 'parariusoffice'); ?>
+						</th>
+						<td>
+							<input type="hidden" name="nomis_random_properties_details_order" id="nomis-properties-random-details-order" value="<?php echo $detailsOrder['nomis_random_properties_details']; ?>" />
+							<ul id="nomis-random-properties-details" class="nomis-random-properties-details details">
+								<?php $i = 1; foreach (get_option('nomis_random_properties_details') as $detail => $checked): ?>
+								<li class="clearfix" id="<?php echo $detail . '_' . $i; ?>">
+									<span class="ui-icon ui-icon-arrowthick-2-n-s sortable handle"></span>
+									<span class="number"><?php echo $i; ?></span>
+									<input type="checkbox" name="nomis_random_properties_details_<?php echo $detail; ?>" id="nomis_random_properties_details_<?php echo $detail; ?>" value="1" <?php echo $checked == 1 ? 'checked="checked" ' : ''; ?>/>
+									<label for="nomis_random_properties_details_<?php echo $detail; ?>">
+										<?php echo _e(ucfirst(str_replace('_', ' ', $detail)), 'parariusoffice'); ?>
+									</label>
+								</li>
+								<?php $i ++; endforeach; ?>
+							</ul>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<div id="forms">
+				<p>
+					<?php _e('Check out the documentation on forms first at'); ?> <a href="http://www.parariusoffice.nl/contactformulieren">www.parariusoffice.nl/contactformulieren</a>.
+				</p>
+				<div id="form-field-template">
+					<div class="form-field">
+						<label><?php _e('Name', 'parariusoffice'); ?></label>
+						<input class="name" type="text" name="formdbname_name[]" value="name" />
+						<label><?php _e('Label', 'parariusoffice'); ?></label>
+						<input class="label" type="text" name="formdbname_label[]" value="label" />
+						<div class="clear"></div>
+						<select name="formdbname_type[]" class="type">
+							<option value="text">Text</option>
+							<option value="select">Select</option>
+							<option value="textarea">Textarea</option>
+							<option value="checkbox">Checkbox</option>
+						</select>
+						<select name="formdbname_required[]" class="required">
+							<option value="1"><?php _e('Required', 'parariusoffice'); ?></option>
+							<option value="0"><?php _e('Not required', 'parariusoffice'); ?></option>
+						</select>
+						<label><?php _e('Description', 'parariusoffice'); ?></label>
+						<input class="description" type="text" name="formdbname_description[]" value="" />
+						<span class="ui-icon ui-icon-closethick remove-form-field"></span>
+						<div class="clear"></div>
+					</div>
+					<a href="javascript:;" class="new-form-field"><?php _e('New form field', 'parariusoffice'); ?></a>
+				</div>
+				<table class="form-table">
+					<tr valign="top">
+						<th scope="row"><?php _e('Add request', 'parariusoffice'); ?><br /><span class="description">[parariusoffice-add-request]</span></th>
+						<td id="request-form" rel="nomis_add_request_form">
+							<?php parariusoffice_form_admin('nomis_add_request_form', 'request-form'); ?>
+						</td>
+					</tr>
+					<tr valign="top">
+						<th scope="row"><?php _e('Add rental declaration', 'parariusoffice'); ?><br /><span class="description">[parariusoffice-add-rental-declaration]</span></th>
+						<td id="request-form" rel="nomis_rental_declaration_form">
+							<?php parariusoffice_form_admin('nomis_rental_declaration_form', 'rental-declaration-form'); ?>
+						</td>
+					</tr>
+				</table>
+			</div>
+
+			<!-- <div id="mobile">
+				<table class="form-table">
+					<tr valign="top">
+						<th scope="row">&nbsp;</th>
+						<td id="request-form" rel="nomis_add_request_form">
+							<input type="checkbox" id="disable-mobile" name="disable_mobile" value="1" <?php if (get_option('nomis_disable_mobile') == '1') echo $htmlChecked; ?> />
+							<label for="disable-mobile"><?php echo __('Disable mobile version', 'parariusoffice'); ?></label><br /><span class="description"><?php _e('When checked, the normal version of the website is also shown on mobile devices', 'parariusoffice'); ?></span>
+						</td>
+					</tr>
+				</table>
+			</div> -->
+
+			<div id="help">
+				<h3><?php _e('Documentation', 'parariusoffice'); ?></h3>
+				<p>
+					<a target="_blank" href="http://www.parariusoffice.nl/website-bouwen">www.parariusoffice.nl/website-bouwen</a>
+				</p>
+				<h3>Contact</h3>
+				<p>
+					<strong>Anno MMX</strong><br />
+					support@annommx.com
+				</p>
+			</div>
+			<?php endif; ?>
+
+		</div>
+	</form>
+</div>

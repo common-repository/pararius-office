@@ -1,0 +1,49 @@
+<?php
+$house = $this->_data['property'];
+$title = parariusoffice_property_title($house);
+
+?>
+<!doctype html>
+<html>
+	<head>
+		<title><?php echo $this->html($title); ?></title>
+		<link type="text/css" rel="stylesheet" href="<?php echo PARARIUSOFFICE_PLUGIN_URL; ?>/front/assets/stylesheets/parariusoffice-print.css" />
+	</head>
+	<body onload="window.print();">
+		<div id="content">
+			<div class="broker-info">
+				<h1><?php echo $house['broker'][0]['name']; ?></h1>
+
+				<p>
+					<?php echo $house['broker'][0]['telephone']; ?><br />
+					<?php echo $house['broker'][0]['emailaddress']; ?>
+				</p>
+				<p>
+					<?php echo nl2br($this->html($house['broker'][0]['address'])); ?>
+				</p>
+			</div>
+			<img class="logo" src="<?php echo $house['broker'][0]['logo']; ?>" alt="<?php echo $house['broker'][0]['name']; ?>">
+			<p><br class="clear"></p>
+			
+			<h1><?php echo $this->html($title); ?></h1>
+			
+			<?php include __DIR__ . '/partials/_property_details.phtml'; ?>
+			<p><br class="clear"></p>
+			
+			<div style="font-size: 8pt;">
+				<?php include __DIR__ . '/partials/_property_description.phtml'; ?>
+			</div>
+			<p><br></p>
+
+			<div class="photos" style="text-align: center;">
+				<?php foreach (array_slice($house['photos'], 0, 4) as $photo): ?>
+				<img src="<?php echo $photo['huge']; ?>" alt="">
+				<?php endforeach; ?>
+				<img src="http://maps.googleapis.com/maps/api/staticmap?size=600x400&amp;scale=1&amp;zoom=16&amp;sensor=false&amp;markers=<?php echo $house['lat'] . ', ' . $house['lng']; ?>" alt="">
+				<?php foreach (array_slice($house['photos'], 4, 3) as $photo): ?>
+				<img src="<?php echo $photo['huge']; ?>" alt="">
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</body>
+</html>

@@ -1,0 +1,30 @@
+<div class="parariusoffice-form parariusoffice-contactform">
+
+	<?php if (!empty($data['contact']['success'])) : ?>
+	<p class="success"><?php echo __('You successfully contacted us, we\'ll get back to you as soon as possible!', 'parariusoffice'); ?></p>
+	<?php else : ?>
+
+	<?php if (@$data['contact']['error'] == true) : ?>
+	<p class="error"><?php echo __('Error occurred, please review.', 'parariusoffice'); ?></p>
+	<?php endif; ?>
+
+	<form action="" method="post">
+		<dl>
+			<?php
+
+			foreach ($data['contact']['form'] as $name => $info)
+			{
+				echo $this->formText($name,
+					@$info['info'],
+					@$info['options']);
+			}
+
+			?>
+			<dt>&nbsp;</dt>
+			<dd><input type="submit" value="<?php echo __('Send', 'parariusoffice'); ?>" name="add_contact" class="submit"></dd>
+		</dl>
+	</form>
+
+	<?php endif; ?>
+
+</div>

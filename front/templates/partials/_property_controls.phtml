@@ -1,0 +1,105 @@
+<?php
+
+$options = array(
+	'back' => get_option('nomis_property_back'),
+	'contact' => get_option('nomis_property_contact'),
+	'addthis' => get_option('nomis_property_addthis'),
+	'mailtofriend' => get_option('nomis_property_mailtofriend'),
+	'print' => get_option('nomis_property_print')
+);
+
+if (array_filter($options)) :
+	?>
+	<div class="controls">
+		<ul>
+			<?php if ($options['back']) : ?>
+			<li class="back">
+				<a href="javascript:history.back();"><?php _e('Back to search results', 'parariusoffice'); ?></a>
+			</li>
+			<?php endif; ?>
+			
+			<?php if ($options['contact']) : ?>
+			<li class="contact">
+				<a href="#contact-about-house-form" class="contact-about-house-button"><?php _e('Contact us about this house', 'parariusoffice'); ?></a>
+				<div style="display:none;">
+					<div id="contact-about-house-form" class="parariusoffice-modal">
+						<form method="post" action="javascript:;" class="contact-about-house-form-form">
+							<input type="hidden" name="id" value="<?php echo $house['id']; ?>">
+
+							<h3><?php _e('Contact us about this house', 'parariusoffice'); ?></h3>
+							<p class="response"></p>
+							<dl>
+								<dt><?php _e('Name', 'parariusoffice'); ?> *</dt>
+								<dd><input type="text" name="last_name"></dd>
+								<dt><?php _e('Email', 'parariusoffice'); ?> *</dt>
+								<dd><input type="text" name="emailaddress"></dd>
+								<dt><?php _e('Telephonenumber', 'parariusoffice'); ?></dt>
+								<dd><input type="text" name="telephone"></dd>
+								<dt><?php _e('Message', 'parariusoffice'); ?></dt>
+								<dd><textarea name="message" cols="50" rows="7"></textarea></dd>
+								<dt>&nbsp;</dt>
+								<dd><input type="submit" value="<?php _e('Send', 'parariusoffice'); ?>" name="mailtofriend" class="submit" id="contact-about-house-submit" /></dd>
+							</dl>
+							<span><?php _e('Fields with a * are required', 'parariusoffice'); ?></span>
+						</form>
+					</div>
+					<script type="text/javascript">
+					// contact
+					</script>
+				</div>
+			</li>
+			<?php endif;
+
+			if ($options['addthis']) : ?>
+			<li class="addthis">
+				<!-- AddThis Button BEGIN -->
+				<div class="addthis_toolbox addthis_default_style ">
+					<a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+					<a class="addthis_button_tweet"></a>
+					<a class="addthis_button_pinterest_pinit"></a>
+					<a class="addthis_counter addthis_pill_style"></a>
+				</div>
+				<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-5124b60567c2d96c"></script>
+				<!-- AddThis Button END -->
+			</li>
+			<?php endif;
+
+			if ($options['mailtofriend']) : ?>
+			<li class="mailtofriend">
+				<a href="#mail-to-friend-form" class="mail-a-friend"><?php _e('Mail to friend', 'parariusoffice'); ?></a>
+				<div style="display:none;">
+					<div id="mail-to-friend-form">
+						<form action="" method="post" class="mail-to-friend-form-form">
+							<input type="hidden" name="id" value="<?php echo $house['id']; ?>">
+
+							<h3><?php _e('Mail to a friend', 'parariusoffice'); ?></h3>
+							<p class="response"></p>
+							<dl>
+								<dt><?php _e('Name sender', 'parariusoffice'); ?> *</dt>
+								<dd><input type="text" name="sender_name"></dd>
+								<dt><?php _e('Email sender', 'parariusoffice'); ?> *</dt>
+								<dd><input type="text" name="sender_email"></dd>
+								<dt><?php _e('Name recipient', 'parariusoffice'); ?> *</dt>
+								<dd><input type="text" name="friend_name"></dd>
+								<dt><?php _e('Email recipient', 'parariusoffice'); ?> *</dt>
+								<dd><input type="text" name="friend_email"></dd>
+								<dt><?php _e('Message', 'parariusoffice'); ?></dt>
+								<dd><textarea cols="50" rows="7" name="message"></textarea></dd>
+								<dt>&nbsp;</dt>
+								<dd><input type="submit" value="<?php _e('Send', 'parariusoffice'); ?>" class="submit" id="mail-to-friend-submit" /></dd>
+							</dl>
+							<span><?php _e('Fields with a * are required', 'parariusoffice'); ?></span>
+						</form>
+					</div>
+				</div>
+			</li>
+			<?php endif; ?>
+			<?php if ($options['print']) : ?>
+			<li class="print">
+				<a href="<?php echo parariusoffice_property_link($house); ?>?print-property=true" class="parariusoffice-print-property"><?php _e('Print'); ?></a>
+			</li>
+			<?php endif; ?>
+		</ul>
+		<div class="clear"></div>
+	</div>
+	<?php endif; ?>

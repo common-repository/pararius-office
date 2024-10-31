@@ -1,0 +1,126 @@
+#parariusoffice-options .clearfix {
+  *zoom: 1;
+}
+#parariusoffice-options .clearfix:before,
+#parariusoffice-options .clearfix:after {
+  content: ' ';
+  display: table;
+}
+#parariusoffice-options .clearfix:after {
+  clear: both;
+}
+#parariusoffice-options .po-submit {
+  float: right;
+}
+#parariusoffice-options .details input,
+#parariusoffice-options .search-criteria input {
+  float: left;
+}
+#parariusoffice-options .details label,
+#parariusoffice-options .search-criteria label {
+  position: relative;
+  display: block;
+  float: left;
+  padding-left: 13px;
+}
+#parariusoffice-options .details .handle,
+#parariusoffice-options .search-criteria .handle {
+  cursor: move;
+  width: 16px;
+  float: left;
+  height: 16px;
+}
+#parariusoffice-options .details .number,
+#parariusoffice-options .search-criteria .number {
+  width: 20px;
+  float: left;
+  line-height: 18px;
+}
+#parariusoffice-options .details {
+  width: 230px;
+  float: left;
+}
+#parariusoffice-options #nomis-submit {
+  float: right;
+}
+#parariusoffice-options .green {
+  color: #006505;
+  font-weight: bold;
+}
+#parariusoffice-options .red {
+  color: #CC0000;
+  font-weight: bold;
+}
+#parariusoffice-options .listContainer1,
+#parariusoffice-options .listContainer2,
+#parariusoffice-options .listContainer3 {
+  width: 800px;
+}
+#parariusoffice-options #property-layout img,
+#parariusoffice-options #property-layout input {
+  float: left;
+}
+#parariusoffice-options #property-layout img {
+  border: 2px solid #ccc;
+  margin: 8px 10px 0 5px;
+}
+#parariusoffice-options #property-layout input {
+  margin-top: 10px;
+}
+#parariusoffice-options .details-category {
+  width: 200px;
+  float: left;
+  border: 1px solid #ccc;
+  margin-right: 10px;
+  background: #fff;
+}
+#parariusoffice-options .details-category h4 {
+  background: #eee;
+  margin: 0 0 8px 0;
+  padding: 6px 0 6px 5px;
+}
+#parariusoffice-options .details-category li {
+  margin-left: 5px;
+}
+#parariusoffice-options .details-category label {
+  padding-left: 5px;
+}
+#parariusoffice-options .details-category .handle {
+  float: left;
+}
+#parariusoffice-options .form-field {
+  border: 1px solid #bbb;
+  padding: 10px;
+  margin-bottom: 10px;
+  position: relative;
+  background: #f1f1f1;
+}
+#parariusoffice-options .ui-icon-closethick {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+#parariusoffice-options .form-field label,
+#parariusoffice-options .form-field input,
+#parariusoffice-options .form-field select {
+  float: left;
+  margin: 0 10px 3px 0;
+}
+#parariusoffice-options .form-field label {
+  width: auto;
+  line-height: 22px;
+}
+#parariusoffice-options .form-field .name,
+#parariusoffice-options .form-field .label {
+  width: 350px;
+}
+#parariusoffice-options .form-field .description {
+  width: 350px;
+}
+#parariusoffice-options #form-field-template {
+  display: none;
+}
+#parariusoffice-options .new-form-field {
+  display: block;
+  margin: -2px 0 10px 0;
+}
